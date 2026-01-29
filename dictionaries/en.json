@@ -1,0 +1,137 @@
+{
+  "navbar": {
+    "solutions": "Solutions",
+    "innovation": "Innovation",
+    "impact": "Impact",
+    "contact": "Contact",
+    "getQuote": "Get a Quote"
+  },
+  "hero": {
+    "exploreSolutions": "Explore Solutions",
+    "quality": "Quality",
+    "euStandards": "EU Standards",
+    "innovation": "Innovation",
+    "aiDriven": "AI Driven",
+    "products": [
+      {
+        "title": "Innovative Agriculture",
+        "subtitle": "Leading CIS Market",
+        "description": "Full-cycle development and installation of high-tech greenhouse complexes. We combine engineering excellence with sustainable growth.",
+        "stats": [
+          { "label": "Projects", "value": "500+" },
+          { "label": "Regions", "value": "15+" },
+          { "label": "Efficiency", "value": "98%" }
+        ]
+      },
+      {
+        "title": "Industrial Complexes",
+        "subtitle": "Scale & Profitability",
+        "description": "Large-scale automated greenhouse systems designed for maximum yield and commercial success in any climate.",
+        "stats": [
+          { "label": "Max Area", "value": "50+ Ha" },
+          { "label": "Automation", "value": "99%" },
+          { "label": "ROI", "value": "24 Mo" }
+        ]
+      },
+      {
+        "title": "Smart Farming",
+        "subtitle": "Precision Control",
+        "description": "Medium-sized solutions with integrated IoT sensors and AI climate control for optimized plant growth.",
+        "stats": [
+          { "label": "Sensors", "value": "200+" },
+          { "label": "Resource Save", "value": "40%" },
+          { "label": "Yield", "value": "+35%" }
+        ]
+      },
+      {
+        "title": "Eco-Residential",
+        "subtitle": "Private Estates",
+        "description": "Custom-designed greenhouses for luxury residences, focusing on aesthetics and year-round organic production.",
+        "stats": [
+          { "label": "Design", "value": "Custom" },
+          { "label": "Freshness", "value": "24/7" },
+          { "label": "Style", "value": "Premium" }
+        ]
+      }
+    ]
+  },
+  "solutions": {
+    "tag": "Tailored Solutions",
+    "title": "Future-Ready Infrastructure for Modern Agriculture",
+    "description": "We provide a comprehensive range of products designed to meet the specific needs of different market segments.",
+    "learnMore": "Learn More",
+    "items": [
+      {
+        "title": "Industrial Complexes",
+        "description": "Large-scale automated greenhouse systems designed for maximum yield and commercial profitability."
+      },
+      {
+        "title": "Smart Farming",
+        "description": "Medium-sized solutions with integrated IoT sensors and automated climate control for optimized growth."
+      },
+      {
+        "title": "Eco-Residential",
+        "description": "Custom-designed greenhouses for private estates, focusing on aesthetics and year-round organic production."
+      },
+      {
+        "title": "Technical Support",
+        "description": "Full maintenance, modernization of existing complexes, and expert consulting services across CIS."
+      }
+    ]
+  },
+  "innovation": {
+    "tag": "Technology First",
+    "title": "Driving the Future of Agricultural Innovation",
+    "description": "We don't just build greenhouses; we create intelligent ecosystems. Our focus on R&D allows us to implement the latest technological breakthroughs ahead of the market.",
+    "whitepaper": "Download Technical Whitepaper",
+    "features": [
+      {
+        "title": "AI Climate Control",
+        "description": "Self-adjusting systems that monitor humidity, CO2, and temperature in real-time."
+      },
+      {
+        "title": "Energy Optimization",
+        "description": "Advanced shading and thermal screening that reduces energy costs by up to 35%."
+      },
+      {
+        "title": "Precision Irrigation",
+        "description": "Hydroponic and drip systems that deliver nutrients directly to the root zone."
+      },
+      {
+        "title": "Adaptive Heating",
+        "description": "Hybrid heating solutions using renewable energy and industrial heat recovery."
+      }
+    ],
+    "labels": {
+      "automation": "Automation",
+      "sustainability": "Sustainability",
+      "hydraulics": "Hydraulics",
+      "integration": "Integration"
+    }
+  },
+  "impact": {
+    "tag": "Our Global Impact",
+    "title": "Establishing Standards of Excellence Across the CIS Market",
+    "description": "With over a decade of experience, InnovaTech has become the trusted partner for governments, commercial growers, and private investors. Our presence in major CIS cities ensures rapid deployment and local support.",
+    "stats": [
+      { "label": "Countries Served", "value": "12+" },
+      { "label": "Happy Clients", "value": "1,200+" },
+      { "label": "Industry Awards", "value": "25+" },
+      { "label": "Total Area (Ha)", "value": "850+" }
+    ]
+  },
+  "footer": {
+    "description": "Leading the transition to sustainable and intelligent agriculture across the CIS region.",
+    "quickLinks": "Quick Links",
+    "solutions": "Solutions",
+    "innovation": "Innovation",
+    "impact": "Impact",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Get the latest updates on agricultural technology.",
+    "subscribe": "Subscribe",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

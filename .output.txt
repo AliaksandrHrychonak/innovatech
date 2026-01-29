@@ -1,0 +1,575 @@
+'use client';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Menu, X, Leaf } from 'lucide-react';
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  const navLinks = [
+    { name: 'Solutions', href: '#solutions' },
+    { name: 'Innovation', href: '#innovation' },
+    { name: 'Impact', href: '#impact' },
+    { name: 'Contact', href: '#contact' },
+  ];
+  return (
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-zinc-200 py-3' : 'bg-transparent py-5'}`}>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="bg-primary p-1.5 rounded-lg text-primary-foreground group-hover:rotate-12 transition-transform">
+              <Leaf size={24} />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              Innova<span className="text-primary">Tech</span>
+            </span>
+          </Link>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="#contact"
+              className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-all shadow-sm"
+            >
+              Get a Quote
+            </Link>
+          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-zinc-200 py-6 px-4 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-5">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-lg font-medium text-foreground py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="#contact"
+              className="bg-primary text-primary-foreground px-6 py-3 rounded-xl text-center font-semibold mt-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Get a Quote
+            </Link>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+export default Navbar;
+'use client';
+import React, { useRef, useEffect, useState } from 'react';
+import { useScroll, motion, useSpring, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ShieldCheck, Zap, Factory, LayoutGrid, Home } from 'lucide-react';
+import Greenhouse3D from './Greenhouse3D';
+interface ProductData {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: React.ReactNode;
+  stats: { label: string; value: string }[];
+  color: string;
+}
+const products: ProductData[] = [
+  {
+    title: "Innovative Agriculture",
+    subtitle: "Leading CIS Market",
+    description: "Full-cycle development and installation of high-tech greenhouse complexes. We combine engineering excellence with sustainable growth.",
+    icon: <Zap className="text-primary" />,
+    stats: [
+      { label: "Projects", value: "500+" },
+      { label: "Regions", value: "15+" },
+      { label: "Efficiency", value: "98%" }
+    ],
+    color: "#16a34a"
+  },
+  {
+    title: "Industrial Complexes",
+    subtitle: "Scale & Profitability",
+    description: "Large-scale automated greenhouse systems designed for maximum yield and commercial success in any climate.",
+    icon: <Factory className="text-primary" />,
+    stats: [
+      { label: "Max Area", value: "50+ Ha" },
+      { label: "Automation", value: "99%" },
+      { label: "ROI", value: "24 Mo" }
+    ],
+    color: "#2563eb"
+  },
+  {
+    title: "Smart Farming",
+    subtitle: "Precision Control",
+    description: "Medium-sized solutions with integrated IoT sensors and AI climate control for optimized plant growth.",
+    icon: <LayoutGrid className="text-primary" />,
+    stats: [
+      { label: "Sensors", value: "200+" },
+      { label: "Resource Save", value: "40%" },
+      { label: "Yield", value: "+35%" }
+    ],
+    color: "#059669"
+  },
+  {
+    title: "Eco-Residential",
+    subtitle: "Private Estates",
+    description: "Custom-designed greenhouses for luxury residences, focusing on aesthetics and year-round organic production.",
+    icon: <Home className="text-primary" />,
+    stats: [
+      { label: "Design", value: "Custom" },
+      { label: "Freshness", value: "24/7" },
+      { label: "Style", value: "Premium" }
+    ],
+    color: "#d97706"
+  }
+];
+const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on("change", (latest) => {
+      setScrollProgress(latest);
+      const index = Math.min(
+        Math.floor(latest * products.length),
+        products.length - 1
+      );
+      if (index !== currentIndex) {
+        setCurrentIndex(index);
+      }
+    });
+    return () => unsubscribe();
+  }, [smoothProgress, currentIndex]);
+  return (
+    <section ref={containerRef} className="relative h-[400vh] bg-white">
+      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -z-10" />
+
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="flex flex-col gap-8 z-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="space-y-6"
+                >
+                  <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full text-primary text-sm font-semibold w-fit">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    {products[currentIndex].subtitle}
+                  </div>
+
+                  <div className="space-y-4">
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
+                      {products[currentIndex].title.split(' ')[0]} <br />
+                      <span className="text-primary italic">
+                        {products[currentIndex].title.split(' ').slice(1).join(' ')}
+                      </span>
+                    </h1>
+                    <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
+                      {products[currentIndex].description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 group">
+                      Explore Solutions
+                      <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-100">
+                    {products[currentIndex].stats.map((stat, i) => (
+                      <div key={i} className="flex flex-col">
+                        <span className="text-2xl font-bold text-foreground">{stat.value}</span>
+                        <span className="text-sm text-muted-foreground">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="relative lg:h-[600px] flex items-center justify-center">
+              <div className="relative w-full aspect-square md:aspect-auto md:h-[500px] lg:h-[600px] rounded-[2rem] overflow-hidden">
+                <Greenhouse3D
+                  progress={scrollProgress}
+                  color={products[currentIndex].color}
+                />
+
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-8 left-8 bg-white/90 backdrop-blur px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/20"
+                >
+                  <div className="bg-green-100 p-2 rounded-lg text-green-600">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-muted-foreground">Quality</span>
+                    <span className="text-sm font-bold">EU Standards</span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-12 right-8 bg-white/90 backdrop-blur px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/20"
+                >
+                  <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
+                    <Zap size={20} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-muted-foreground">Innovation</span>
+                    <span className="text-sm font-bold">AI Driven</span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+export default Hero;
+import React from 'react';
+import { LayoutGrid, Factory, Home, Settings, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+const solutions = [
+  {
+    title: 'Industrial Complexes',
+    description: 'Large-scale automated greenhouse systems designed for maximum yield and commercial profitability.',
+    icon: <Factory className="w-8 h-8" />,
+    link: '/solutions/industrial',
+    color: 'bg-blue-50 text-blue-600',
+  },
+  {
+    title: 'Smart Farming',
+    description: 'Medium-sized solutions with integrated IoT sensors and automated climate control for optimized growth.',
+    icon: <LayoutGrid className="w-8 h-8" />,
+    link: '/solutions/smart-farming',
+    color: 'bg-green-50 text-green-600',
+  },
+  {
+    title: 'Eco-Residential',
+    description: 'Custom-designed greenhouses for private estates, focusing on aesthetics and year-round organic production.',
+    icon: <Home className="w-8 h-8" />,
+    link: '/solutions/residential',
+    color: 'bg-amber-50 text-amber-600',
+  },
+  {
+    title: 'Technical Support',
+    description: 'Full maintenance, modernization of existing complexes, and expert consulting services across CIS.',
+    icon: <Settings className="w-8 h-8" />,
+    link: '/solutions/support',
+    color: 'bg-purple-50 text-purple-600',
+  },
+];
+const Solutions = () => {
+  return (
+    <section id="solutions" className="py-24 bg-zinc-50">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl space-y-4">
+            <h2 className="text-primary font-bold tracking-wider uppercase text-sm">Tailored Solutions</h2>
+            <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+              Future-Ready Infrastructure for Modern Agriculture
+            </h3>
+          </div>
+          <p className="text-muted-foreground text-lg max-w-md">
+            We provide a comprehensive range of products designed to meet the specific needs of different market segments.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {solutions.map((item, index) => (
+            <Link
+              key={index}
+              href={item.link}
+              className="group bg-white p-8 rounded-3xl border border-zinc-200 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col h-full"
+            >
+              <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                {item.icon}
+              </div>
+              <h4 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                {item.title}
+                <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1 group-hover:translate-y-0" />
+              </h4>
+              <p className="text-muted-foreground leading-relaxed flex-grow">
+                {item.description}
+              </p>
+              <div className="mt-6 pt-6 border-t border-zinc-50 flex items-center text-sm font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                Learn More
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+export default Solutions;
+import React from 'react';
+import { Cpu, Droplets, Sun, Thermometer } from 'lucide-react';
+const Innovation = () => {
+  const features = [
+    {
+      icon: <Cpu className="w-6 h-6" />,
+      title: 'AI Climate Control',
+      description: 'Self-adjusting systems that monitor humidity, CO2, and temperature in real-time.',
+    },
+    {
+      icon: <Sun className="w-6 h-6" />,
+      title: 'Energy Optimization',
+      description: 'Advanced shading and thermal screening that reduces energy costs by up to 35%.',
+    },
+    {
+      icon: <Droplets className="w-6 h-6" />,
+      title: 'Precision Irrigation',
+      description: 'Hydroponic and drip systems that deliver nutrients directly to the root zone.',
+    },
+    {
+      icon: <Thermometer className="w-6 h-6" />,
+      title: 'Adaptive Heating',
+      description: 'Hybrid heating solutions using renewable energy and industrial heat recovery.',
+    },
+  ];
+  return (
+    <section id="innovation" className="py-24 bg-white overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="absolute -top-12 -left-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10" />
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="text-primary font-bold tracking-wider uppercase text-sm">Technology First</h2>
+                <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-tight">
+                  Driving the Future of <br /> Agricultural Innovation
+                </h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  We don't just build greenhouses; we create intelligent ecosystems.
+                  Our focus on R&D allows us to implement the latest technological breakthroughs
+                  ahead of the market.
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-8">
+                {features.map((f, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                      {f.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground mb-1">{f.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button className="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all group">
+                Download Technical Whitepaper
+                <span className="w-8 h-px bg-primary group-hover:w-12 transition-all" />
+              </button>
+            </div>
+          </div>
+          <div className="lg:pl-12">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4 pt-12">
+                <div className="aspect-[4/5] bg-zinc-100 rounded-3xl overflow-hidden shadow-lg border-2 border-white relative group">
+                   <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors" />
+                   <div className="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-zinc-500">Automation</div>
+                </div>
+                <div className="aspect-square bg-zinc-100 rounded-3xl overflow-hidden shadow-lg border-2 border-white relative group">
+                   <div className="absolute inset-0 bg-green-900/5 group-hover:bg-transparent transition-colors" />
+                   <div className="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-zinc-500">Sustainability</div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="aspect-square bg-zinc-100 rounded-3xl overflow-hidden shadow-lg border-2 border-white relative group">
+                   <div className="absolute inset-0 bg-blue-900/5 group-hover:bg-transparent transition-colors" />
+                   <div className="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-zinc-500">Hydraulics</div>
+                </div>
+                <div className="aspect-[4/5] bg-zinc-100 rounded-3xl overflow-hidden shadow-lg border-2 border-white relative group">
+                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
+                   <div className="absolute bottom-4 left-4 text-xs font-bold uppercase tracking-widest text-zinc-500">Integration</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+export default Innovation;
+import React from 'react';
+import { Globe2, Users2, Award, Building2 } from 'lucide-react';
+const Impact = () => {
+  const stats = [
+    { label: 'Countries Served', value: '12+', icon: <Globe2 className="w-5 h-5" /> },
+    { label: 'Happy Clients', value: '1,200+', icon: <Users2 className="w-5 h-5" /> },
+    { label: 'Industry Awards', value: '25+', icon: <Award className="w-5 h-5" /> },
+    { label: 'Total Area (Ha)', value: '850+', icon: <Building2 className="w-5 h-5" /> },
+  ];
+  return (
+    <section id="impact" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-12 translate-x-32" />
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="max-w-3xl mb-16">
+          <h2 className="text-primary-foreground/80 font-bold tracking-wider uppercase text-sm mb-4">Our Global Impact</h2>
+          <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Establishing Standards of Excellence Across the CIS Market
+          </h3>
+          <p className="text-primary-foreground/70 text-lg leading-relaxed">
+            With over a decade of experience, InnovaTech has become the trusted partner for governments,
+            commercial growers, and private investors. Our presence in major CIS cities ensures
+            rapid deployment and local support.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((s, i) => (
+            <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/10 p-8 rounded-3xl group hover:bg-white/20 transition-all">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                {s.icon}
+              </div>
+              <div className="text-4xl font-bold mb-2">{s.value}</div>
+              <div className="text-primary-foreground/60 font-medium uppercase tracking-wider text-xs">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-20 pt-12 border-t border-white/10 flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+           {/* Placeholder for partner logos */}
+           <span className="text-2xl font-bold italic tracking-tighter">PARTNER ONE</span>
+           <span className="text-2xl font-bold italic tracking-tighter">GLOBAL AGRI</span>
+           <span className="text-2xl font-bold italic tracking-tighter">TECH SYSTEMS</span>
+           <span className="text-2xl font-bold italic tracking-tighter">CIS LOGISTICS</span>
+           <span className="text-2xl font-bold italic tracking-tighter">NATURE PLUS</span>
+        </div>
+      </div>
+    </section>
+  );
+};
+export default Impact;
+import React from 'react';
+import Link from 'next/link';
+import { Leaf, Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram } from 'lucide-react';
+const Footer = () => {
+  return (
+    <footer id="contact" className="bg-zinc-950 text-zinc-400 pt-24 pb-12">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-4 gap-12 mb-16">
+          <div className="lg:col-span-1 space-y-6">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="bg-primary p-1.5 rounded-lg text-primary-foreground group-hover:rotate-12 transition-transform">
+                <Leaf size={24} />
+              </div>
+              <span className="text-xl font-bold tracking-tight text-white">
+                Innova<span className="text-primary">Tech</span>
+              </span>
+            </Link>
+            <p className="text-sm leading-relaxed">
+              Leading the agricultural revolution through engineering excellence and sustainable practices.
+              Serving the entire CIS market with innovative greenhouse solutions.
+            </p>
+            <div className="flex gap-4">
+              <Link href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                <Linkedin size={18} />
+              </Link>
+              <Link href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                <Facebook size={18} />
+              </Link>
+              <Link href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                <Instagram size={18} />
+              </Link>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-6">Solutions</h4>
+            <ul className="space-y-4 text-sm">
+              <li><Link href="/solutions/industrial" className="hover:text-primary transition-colors">Industrial Complexes</Link></li>
+              <li><Link href="/solutions/smart-farming" className="hover:text-primary transition-colors">Smart Farming</Link></li>
+              <li><Link href="/solutions/residential" className="hover:text-primary transition-colors">Eco-Residential</Link></li>
+              <li><Link href="/solutions/modernization" className="hover:text-primary transition-colors">Modernization</Link></li>
+              <li><Link href="/solutions/consulting" className="hover:text-primary transition-colors">Agri-Consulting</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-6">Company</h4>
+            <ul className="space-y-4 text-sm">
+              <li><Link href="#" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Innovation Hub</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Projects Map</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Press Kit</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-6">Get in Touch</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="text-primary flex-shrink-0" />
+                <span>123 Innovation Drive, Tech District, Astana, Kazakhstan</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone size={18} className="text-primary flex-shrink-0" />
+                <span>+7 (717) 123-45-67</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={18} className="text-primary flex-shrink-0" />
+                <span>hello@innovatech.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs uppercase tracking-widest font-medium">
+          <p>© 2026 InnovaTech Greenhouse Systems. All Rights Reserved.</p>
+          <div className="flex gap-8">
+            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+export default Footer;
