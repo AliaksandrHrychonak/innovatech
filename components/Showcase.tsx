@@ -40,7 +40,7 @@ const Showcase = ({ dict }: ShowcaseProps) => {
       delay: 0.5
     },
     {
-      src: "/Greenhouse.webp",
+      src: "/cover-scaled.webp",
       className: "md:col-span-2 md:row-span-1",
       delay: 0.6
     }
