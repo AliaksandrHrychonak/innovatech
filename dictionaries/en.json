@@ -109,6 +109,11 @@
       "integration": "Integration"
     }
   },
+  "showcase": {
+    "tag": "Our Portfolio",
+    "title": "Excellence in Every Detail",
+    "description": "Explore our completed projects and witness the integration of advanced engineering and nature. From industrial scale to private gardens."
+  },
   "impact": {
     "tag": "Our Global Impact",
     "title": "Establishing Standards of Excellence Across the CIS Market",
