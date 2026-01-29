@@ -263,7 +263,7 @@ const GreenhouseModel = ({ progress, color }: GreenhouseProps) => {
           panelItems.push(
             <mesh 
               key={`panel-side-${i}-${idx}`} 
-              position={coords[0] as [number, number, number]} 
+              position={[coords[0][0], height / 2, z + sectionStep / 2]} 
               rotation={[0, idx === 0 ? -Math.PI/2 : Math.PI/2, 0]}
             >
               <planeGeometry args={[sectionStep, height]} />
