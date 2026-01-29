@@ -18,14 +18,12 @@ const Solutions = ({ dict }: { dict: any }) => {
   return (
     <section id="solutions" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl space-y-4">
-            <h2 className="text-primary font-bold tracking-wider uppercase text-sm">{dict.tag}</h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-              {dict.title}
-            </h3>
-          </div>
-          <p className="text-muted-foreground text-lg max-w-md">
+        <div className="max-w-3xl mb-16 space-y-4">
+          <h2 className="text-primary font-bold tracking-wider uppercase text-sm">{dict.tag}</h2>
+          <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+            {dict.title}
+          </h3>
+          <p className="text-muted-foreground text-lg max-w-2xl">
             {dict.description}
           </p>
         </div>

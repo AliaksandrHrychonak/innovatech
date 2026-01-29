@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Solutions from "@/components/Solutions";
 import Innovation from "@/components/Innovation";
+import Showcase from "@/components/Showcase";
 import Impact from "@/components/Impact";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/lib/get-dictionaries";
@@ -21,6 +22,7 @@ export default async function Home({
         <Hero dict={dict.hero} />
         <Solutions dict={dict.solutions} />
         <Innovation dict={dict.innovation} />
+        <Showcase dict={dict.showcase} />
         <Impact dict={dict.impact} />
       </main>
       <Footer dict={dict.footer} />
