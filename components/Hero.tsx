@@ -132,7 +132,7 @@ const Hero = ({ dict }: { dict: any }) => {
                   </div>
                   <div className="flex flex-col">
                     <span className="text-xs text-muted-foreground">{dict.quality}</span>
-                    <span className="text-sm font-bold text-foreground">{dict.euStandards}</span>
+                    <span className="text-sm font-bold text-foreground">{dict.qualityStandards}</span>
                   </div>
                 </motion.div>
                 
