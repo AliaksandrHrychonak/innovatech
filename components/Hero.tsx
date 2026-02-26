@@ -5,6 +5,7 @@ import { useScroll, motion, useSpring, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Zap, Factory, LayoutGrid, Home } from 'lucide-react';
 
 import Greenhouse3D from './Greenhouse3D';
+import { AnimatedCounter } from './AnimatedCounter';
 
 interface ProductData {
   title: string;
@@ -27,10 +28,10 @@ const Hero = ({ dict }: { dict: any }) => {
     { icon: <Home className="text-primary" />, color: "#d97706" }
   ];
 
-  const products = dict.products.map((p: any, i: number) => ({
+  const products = dict.products?.map((p: any, i: number) => ({
     ...p,
     ...productMeta[i]
-  }));
+  })) || [];
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -44,13 +45,15 @@ const Hero = ({ dict }: { dict: any }) => {
   });
 
   useEffect(() => {
+    if (products.length === 0) return;
+
     const unsubscribe = smoothProgress.on("change", (latest) => {
       setScrollProgress(latest);
       const index = Math.min(
         Math.floor(latest * products.length),
         products.length - 1
       );
-      if (index !== currentIndex) {
+      if (index !== currentIndex && index >= 0) {
         setCurrentIndex(index);
       }
     });
@@ -58,12 +61,18 @@ const Hero = ({ dict }: { dict: any }) => {
   }, [smoothProgress, currentIndex, products.length]);
 
 
+  if (products.length === 0) {
+    return null;
+  }
+
+  const currentProduct = products[currentIndex] || products[0];
+
   return (
     <section ref={containerRef} className="relative h-[400vh] bg-background">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -z-10" />
-        
+
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-8 z-10">
@@ -81,35 +90,50 @@ const Hero = ({ dict }: { dict: any }) => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    {products[currentIndex].subtitle}
+                    {currentProduct.subtitle}
                   </div>
                   
                   <div className="space-y-4">
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-                      {products[currentIndex].title.split(' ')[0]} <br />
+                      {currentProduct.title.split(' ')[0]} <br />
                       <span className="text-primary italic">
-                        {products[currentIndex].title.split(' ').slice(1).join(' ')}
+                        {currentProduct.title.split(' ').slice(1).join(' ')}
                       </span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                      {products[currentIndex].description}
+                      {currentProduct.description}
                     </p>
                   </div>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 group">
                       {dict.exploreSolutions}
                       <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
-                  
+
                   <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
-                    {products[currentIndex].stats.map((stat: any, i: number) => (
-                      <div key={i} className="flex flex-col">
-                        <span className="text-2xl font-bold text-foreground">{stat.value}</span>
-                        <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      </div>
-                    ))}
+                    {currentProduct.stats?.map((stat: any, i: number) => {
+                      const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ''));
+                      const suffix = stat.value.replace(/[0-9]/g, '');
+
+                      return (
+                        <div key={i} className="flex flex-col">
+                          <span className="text-2xl md:text-3xl font-bold text-foreground">
+                            {numericValue ? (
+                              <AnimatedCounter
+                                end={numericValue}
+                                suffix={suffix}
+                                duration={2500}
+                              />
+                            ) : (
+                              stat.value
+                            )}
+                          </span>
+                          <span className="text-sm text-muted-foreground">{stat.label}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -117,9 +141,9 @@ const Hero = ({ dict }: { dict: any }) => {
             
             <div className="relative lg:h-[600px] flex items-center justify-center">
               <div className="relative w-full aspect-square md:aspect-auto md:h-[500px] lg:h-[600px] rounded-[2rem] overflow-hidden">
-                <Greenhouse3D 
-                  progress={scrollProgress} 
-                  color={products[currentIndex].color} 
+                <Greenhouse3D
+                  progress={scrollProgress}
+                  color={currentProduct.color}
                 />
                 
                 <motion.div 
