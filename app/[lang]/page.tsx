@@ -14,6 +14,7 @@ import Partners from "@/components/Partners";
 import FAQ from "@/components/FAQ";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
+import { ContactDialogProvider } from "@/components/ContactDialogProvider";
 import { getDictionary } from "@/lib/get-dictionaries";
 
 export default async function Home({
@@ -28,16 +29,17 @@ export default async function Home({
   const region = (lang === 'by' ? 'by' : lang === 'kk' ? 'kk' : 'ru') as 'ru' | 'by' | 'kk';
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar lang={lang} dict={dict.navbar} />
-      <main>
-        <Hero dict={dict.hero} />
-        <Solutions dict={dict.solutions} />
-        <Innovation dict={dict.innovation} />
-        <Benefits dict={dict.benefits} />
-        <Process dict={dict.process} />
-        <Showcase dict={dict.showcase} />
-        <Testimonials dict={dict.testimonials} />
+    <ContactDialogProvider dict={dict}>
+      <div className="flex min-h-screen flex-col">
+        <Navbar lang={lang} dict={dict.navbar} />
+        <main>
+          <Hero dict={dict.hero} />
+          <Solutions dict={dict.solutions} />
+          <Innovation dict={dict.innovation} />
+          <Benefits dict={dict.benefits} />
+          <Process dict={dict.process} />
+          <Showcase dict={dict.showcase} />
+          <Testimonials dict={dict.testimonials} />
         <Impact dict={dict.impact} />
         <Awards dict={dict.awards} />
         <TrustMetrics dict={dict.trustMetrics} />
@@ -48,5 +50,6 @@ export default async function Home({
       </main>
       <Footer dict={dict.footer} region={region} />
     </div>
+    </ContactDialogProvider>
   );
 }

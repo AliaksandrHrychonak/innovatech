@@ -6,6 +6,7 @@ import { Menu, Building2, Droplets, Sun, Bot, Sprout, Package, Salad, Wrench, Me
 import { ThemeToggle } from './ThemeToggle';
 import Logo from './Logo';
 import { Button } from '@/components/ui/button';
+import { useContactDialog } from './ContactDialogProvider';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -28,6 +29,7 @@ import { Separator } from '@/components/ui/separator';
 
 const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
   const [scrolled, setScrolled] = useState(false);
+  const { openDialog } = useContactDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,8 +150,8 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
             </div>
 
             <Button
-              asChild
               size="sm"
+              onClick={openDialog}
               className="rounded-full whitespace-nowrap"
               style={{
                 marginLeft: 'clamp(0.25rem, 0.5vw, 0.375rem)',
@@ -158,10 +160,8 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
                 paddingRight: 'clamp(0.75rem, 1.5vw, 1rem)'
               }}
             >
-              <Link href="#contact" className="flex items-center gap-2">
-                <span className="hidden xl:inline">{dict.getQuote}</span>
-                <MessageCircle className="xl:hidden" size={18} />
-              </Link>
+              <span className="hidden xl:inline">{dict.getQuote}</span>
+              <MessageCircle className="xl:hidden" size={18} />
             </Button>
           </div>
 
@@ -284,10 +284,8 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
 
                 <DrawerFooter className="pt-4 border-t">
                   <DrawerClose asChild>
-                    <Button asChild className="rounded-xl w-full">
-                      <Link href="#contact">
-                        {dict.getQuote}
-                      </Link>
+                    <Button onClick={openDialog} className="rounded-xl w-full">
+                      {dict.getQuote}
                     </Button>
                   </DrawerClose>
                 </DrawerFooter>
