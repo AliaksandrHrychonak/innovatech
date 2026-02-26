@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, MessageCircle, ArrowRight } from 'lucide-react';
+import { useContactDialog } from './ContactDialogProvider';
 
 interface ContactInfo {
   country: string;
@@ -13,6 +14,8 @@ interface ContactInfo {
 }
 
 const ContactCTA = ({ dict, region }: { dict: any; region: 'ru' | 'by' | 'kk' }) => {
+  const { openDialog } = useContactDialog();
+
   const contactData: Record<string, ContactInfo> = {
     ru: {
       country: dict.russia,
@@ -71,7 +74,10 @@ const ContactCTA = ({ dict, region }: { dict: any; region: 'ru' | 'by' | 'kk' })
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 group">
+                <button
+                  onClick={openDialog}
+                  className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 group"
+                >
                   <MessageCircle className="w-5 h-5" />
                   {dict.requestConsultation}
                   <ArrowRight className="group-hover:translate-x-1 transition-transform" />

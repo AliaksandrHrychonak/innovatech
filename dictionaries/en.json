@@ -59,50 +59,46 @@
     ]
   },
   "hero": {
-    "exploreSolutions": "Explore Solutions",
+    "title": "The Future of Agrotechnology. Today.",
+    "ctaPrimary": "Get Consultation",
+    "ctaSecondary": "Our Projects",
     "quality": "Quality",
     "qualityStandards": "GOST & ISO Standards",
     "innovation": "Innovation",
     "aiDriven": "AI Driven",
-    "products": [
+    "scrollHint": "Scroll down",
+    "directions": [
       {
-        "title": "Full-Cycle Greenhouse Solutions",
-        "subtitle": "Leading CIS Market",
-        "description": "From design to post-warranty service. Wide range of services: greenhouses, climate control, automation, irrigation, and full support.",
+        "badge": "Full Cycle",
+        "title": "Turnkey Greenhouse Complexes",
+        "description": "Design, construction, and launch of industrial greenhouses of any complexity. From concept to first harvest — comprehensive solution for your business.",
+        "color": "#16a34a",
         "stats": [
-          { "label": "Service Areas", "value": "Wide Range" },
-          { "label": "Years Experience", "value": "10+" },
-          { "label": "Support", "value": "24/7" }
+          { "label": "Projects", "value": "500+" },
+          { "label": "Max Area", "value": "50 ha" },
+          { "label": "ROI", "value": "18 mo" }
         ]
       },
       {
-        "title": "Industrial Complexes",
-        "subtitle": "Scale & Profitability",
-        "description": "Large-scale automated greenhouse systems designed for maximum yield and commercial success in any climate.",
+        "badge": "Future Tech",
+        "title": "Automation & AI",
+        "description": "Smart climate control with AI optimization, IoT sensors, and predictive analytics. Maximum yield with minimum costs.",
+        "color": "#7c3aed",
         "stats": [
-          { "label": "Max Area", "value": "50+ Ha" },
-          { "label": "Automation", "value": "99%" },
-          { "label": "ROI", "value": "24 Mo" }
+          { "label": "IoT Sensors", "value": "500+" },
+          { "label": "Forecast Accuracy", "value": "95%" },
+          { "label": "Resource Savings", "value": "40%" }
         ]
       },
       {
-        "title": "Smart Farming",
-        "subtitle": "Precision Control",
-        "description": "Medium-sized solutions with integrated IoT sensors and AI climate control for optimized plant growth.",
+        "badge": "24/7 Support",
+        "title": "Service & Maintenance",
+        "description": "Warranty and post-warranty service, equipment upgrades, staff training. Technical support anytime, day or night.",
+        "color": "#0891b2",
         "stats": [
-          { "label": "Sensors", "value": "200+" },
-          { "label": "Resource Save", "value": "40%" },
-          { "label": "Yield", "value": "+35%" }
-        ]
-      },
-      {
-        "title": "Eco-Residential",
-        "subtitle": "Private Estates",
-        "description": "Custom-designed greenhouses for luxury residences, focusing on aesthetics and year-round organic production.",
-        "stats": [
-          { "label": "Design", "value": "Custom" },
-          { "label": "Freshness", "value": "24/7" },
-          { "label": "Style", "value": "Premium" }
+          { "label": "Specialists", "value": "50+" },
+          { "label": "Response Time", "value": "< 4h" },
+          { "label": "Warranty", "value": "5 years" }
         ]
       }
     ]
@@ -465,5 +461,24 @@
     "title": "InnovaTech | Future of Sustainable Agriculture",
     "description": "Advanced greenhouse complexes, smart farming solutions, and innovative agricultural engineering for the CIS market.",
     "keywords": "greenhouses, smart farming, CIS agriculture, hydroponics, greenhouse automation, InnovaTech"
+  },
+  "contactDialog": {
+    "title": "Get Consultation",
+    "description": "Leave your contact, and our expert will reach you within 30 minutes",
+    "nameLabel": "Your name",
+    "namePlaceholder": "John Doe",
+    "contactTypeLabel": "How to reach you?",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "phonePlaceholder": "+1 (___) ___-____",
+    "emailPlaceholder": "example@mail.com",
+    "submitButton": "Send Request",
+    "sending": "Sending...",
+    "privacyNote": {
+      "beforeLink": "By clicking, you agree to our",
+      "linkText": "privacy policy"
+    },
+    "successTitle": "Request Sent!",
+    "successMessage": "We'll contact you shortly"
   }
 }
