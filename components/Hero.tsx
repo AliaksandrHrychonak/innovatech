@@ -51,7 +51,7 @@ const Hero = ({ dict }: { dict: any }) => {
 
   return (
     <section ref={containerRef} className="relative h-[400vh] bg-background">
-      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden pt-24 md:pt-28 lg:pt-20">
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl -z-10" />
 
@@ -176,12 +176,13 @@ const Hero = ({ dict }: { dict: any }) => {
               </AnimatePresence>
             </div>
             
-            {/* 3D Model + Floating cards - скрывается на мобильных */}
-            <div className="relative hidden md:flex lg:h-[600px] items-center justify-center">
+            {/* 3D Model + Floating cards */}
+            <div className="relative hidden md:flex items-center justify-center lg:h-[600px]">
               <div
-                className="relative w-full aspect-square rounded-[2rem] overflow-hidden"
+                className="relative w-full rounded-[2rem] overflow-hidden"
                 style={{
-                  height: 'clamp(300px, 50vw, 600px)'
+                  height: 'clamp(350px, 45vw, 600px)',
+                  maxWidth: 'clamp(350px, 45vw, 600px)'
                 }}
               >
                 <Greenhouse3D

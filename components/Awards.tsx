@@ -114,11 +114,11 @@ const Awards = ({ dict }: { dict: any }) => {
               {dict.timeline || 'Временная шкала достижений'}
             </h3>
             <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border hidden md:block" />
+              {/* Timeline line - hidden on mobile */}
+              <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-border" />
 
               {/* Timeline items */}
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-12">
                 {awardsData.map((award, index) => (
                   <motion.div
                     key={index}
@@ -126,11 +126,16 @@ const Awards = ({ dict }: { dict: any }) => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2 }}
-                    className={`flex items-center gap-8 ${
+                    className={`flex items-center gap-4 md:gap-8 ${
                       index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                     }`}
                   >
-                    <div className="flex-1 text-right md:text-left">
+                    {/* Mobile/Tablet layout: dot on left, content on right */}
+                    <div className="relative flex-shrink-0 md:hidden">
+                      <div className={`w-4 h-4 ${award.color.split(' ')[0]} rounded-full border-4 border-background shadow-lg`} />
+                    </div>
+
+                    <div className="flex-1 md:text-left">
                       <div className={`${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                         <Badge variant="outline" className="mb-2">
                           {award.year}
@@ -144,12 +149,12 @@ const Awards = ({ dict }: { dict: any }) => {
                       </div>
                     </div>
 
-                    {/* Center dot */}
-                    <div className="relative">
+                    {/* Desktop: Center dot */}
+                    <div className="relative hidden md:block flex-shrink-0">
                       <div className={`w-4 h-4 ${award.color.split(' ')[0]} rounded-full border-4 border-background shadow-lg`} />
                     </div>
 
-                    <div className="flex-1" />
+                    <div className="flex-1 hidden md:block" />
                   </motion.div>
                 ))}
               </div>
