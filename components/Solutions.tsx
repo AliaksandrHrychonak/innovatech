@@ -1,53 +1,65 @@
 import React from 'react';
-import { LayoutGrid, Factory, Home, Settings, ArrowUpRight } from 'lucide-react';
+import { LayoutGrid, Factory, Home, Settings, Wind, Droplets, Cpu, Sprout, Wrench, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const Solutions = ({ dict }: { dict: any }) => {
   const solutionMeta = [
-    { icon: <Factory className="w-8 h-8" />, link: '/solutions/industrial', color: 'bg-primary/10 text-primary' },
-    { icon: <LayoutGrid className="w-8 h-8" />, link: '/solutions/smart-farming', color: 'bg-primary/10 text-primary' },
-    { icon: <Home className="w-8 h-8" />, link: '/solutions/residential', color: 'bg-primary/10 text-primary' },
-    { icon: <Settings className="w-8 h-8" />, link: '/solutions/support', color: 'bg-primary/10 text-primary' },
+    { icon: <Factory className="w-8 h-8" />, link: '/solutions/greenhouses', color: 'bg-primary/10 text-primary' },
+    { icon: <Wind className="w-8 h-8" />, link: '/solutions/climate', color: 'bg-blue-500/10 text-blue-500' },
+    { icon: <Droplets className="w-8 h-8" />, link: '/solutions/irrigation', color: 'bg-cyan-500/10 text-cyan-500' },
+    { icon: <Cpu className="w-8 h-8" />, link: '/solutions/automation', color: 'bg-purple-500/10 text-purple-500' },
+    { icon: <Sprout className="w-8 h-8" />, link: '/solutions/seedling', color: 'bg-green-500/10 text-green-500' },
+    { icon: <LayoutGrid className="w-8 h-8" />, link: '/solutions/materials', color: 'bg-orange-500/10 text-orange-500' },
+    { icon: <Home className="w-8 h-8" />, link: '/solutions/specialized', color: 'bg-amber-500/10 text-amber-500' },
+    { icon: <Settings className="w-8 h-8" />, link: '/solutions/service', color: 'bg-primary/10 text-primary' },
   ];
 
   const solutions = dict.items.map((item: any, i: number) => ({
     ...item,
-    ...solutionMeta[i]
+    ...solutionMeta[i % solutionMeta.length]
   }));
 
   return (
     <section id="solutions" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mb-16 space-y-4">
+        <div className="max-w-3xl mb-16 space-y-6">
           <h2 className="text-primary font-bold tracking-wider uppercase text-sm">{dict.tag}</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-            {dict.title}
+          <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+            <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              {dict.title}
+            </span>
           </h3>
-          <p className="text-muted-foreground text-lg max-w-2xl">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
             {dict.description}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {solutions.map((item: any, index: number) => (
-            <Link 
-              key={index} 
-              href={item.link}
-              className="group bg-card p-8 rounded-3xl border border-border hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col h-full"
-            >
-              <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                {item.icon}
-              </div>
-              <h4 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
-                {item.title}
-                <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1 group-hover:translate-y-0" />
-              </h4>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                {item.description}
-              </p>
-              <div className="mt-6 pt-6 border-t border-border flex items-center text-sm font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                {dict.learnMore}
-              </div>
+            <Link key={index} href={item.link} className="group">
+              <Card className="h-full hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all">
+                <CardHeader>
+                  <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    {item.icon}
+                  </div>
+                  <CardTitle className="group-hover:text-primary transition-colors flex items-center gap-2">
+                    {item.title}
+                    <ArrowUpRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1 group-hover:translate-y-0" />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="leading-relaxed">
+                    {item.description}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter className="border-t pt-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm font-bold text-primary">
+                    {dict.learnMore}
+                  </span>
+                </CardFooter>
+              </Card>
             </Link>
           ))}
         </div>

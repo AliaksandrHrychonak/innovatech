@@ -2,11 +2,31 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, Building2, Droplets, Sun, Bot, Sprout, Package, Salad, Wrench, MessageCircle } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import Logo from './Logo';
+import { Button } from '@/components/ui/button';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import { Separator } from '@/components/ui/separator';
 
 const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -18,9 +38,9 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
   }, []);
 
   const navLinks = [
-    { name: dict.solutions, href: '#solutions' },
-    { name: dict.innovation, href: '#innovation' },
-    { name: dict.impact, href: '#impact' },
+    { name: dict.technologies, href: '#innovation' },
+    { name: dict.projects, href: '#showcase' },
+    { name: dict.company, href: '#impact' },
     { name: dict.contact, href: '#contact' },
   ];
 
@@ -30,34 +50,127 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
     { code: 'kk', label: 'KK' },
   ];
 
+  // Icons mapping for solutions
+  const solutionIcons: Record<number, React.ReactNode> = {
+    0: <Building2 className="w-5 h-5" />,      // Greenhouse Structures
+    1: <Sun className="w-5 h-5" />,            // Climate Systems
+    2: <Droplets className="w-5 h-5" />,       // Irrigation
+    3: <Bot className="w-5 h-5" />,            // Automation
+    4: <Sprout className="w-5 h-5" />,         // Seedling Equipment
+    5: <Package className="w-5 h-5" />,        // Materials
+    6: <Salad className="w-5 h-5" />,          // Specialized Equipment
+    7: <Wrench className="w-5 h-5" />,         // Service & Installation
+  };
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-border py-3' : 'bg-transparent py-5'}`}>
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between">
-          <Link href={`/${lang}`} className="flex items-center gap-2 group">
-            <div className="bg-primary p-1.5 rounded-lg text-primary-foreground group-hover:rotate-12 transition-transform">
-              <Leaf size={24} />
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-border py-2 sm:py-3' : 'bg-transparent py-3 sm:py-5'}`}>
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        <div className="flex items-center justify-between gap-2">
+          {/* Logo - tagline скрывается до 1280px для экономии места */}
+          <Link href={`/${lang}`} className="group flex-shrink-0">
+            <div className="hidden xl:block">
+              <Logo tagline={dict.tagline} />
             </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">
-              Innova<span className="text-primary">Tech</span>
-            </span>
+            {/* Компактная версия до 1280px */}
+            <div className="xl:hidden">
+              <Logo />
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-            
-            <div className="flex items-center gap-3 border-l border-border pl-6 ml-2">
+          {/* Desktop Navigation - показывается с 1024px */}
+          <div className="hidden lg:flex items-center flex-1 justify-end" style={{ gap: 'clamp(0.25rem, 0.5vw, 0.5rem)' }}>
+            <NavigationMenu>
+              <NavigationMenuList>
+                {/* Solutions Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger
+                    className="text-sm font-medium text-muted-foreground hover:text-primary bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[active]:bg-transparent data-[state=open]:text-primary whitespace-nowrap"
+                    style={{ fontSize: 'clamp(0.813rem, 0.9vw, 0.875rem)' }}
+                  >
+                    {dict.solutions}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[500px] gap-2 p-4 md:grid-cols-2">
+                      {dict.solutionsList.map((solution: any, index: number) => (
+                        <ListItem
+                          key={index}
+                          title={solution.name}
+                          href={solution.href}
+                          icon={solutionIcons[index]}
+                        >
+                          {solution.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Other Nav Links */}
+                {navLinks.map((link) => (
+                  <NavigationMenuItem key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 whitespace-nowrap"
+                      style={{
+                        fontSize: 'clamp(0.813rem, 0.9vw, 0.875rem)',
+                        paddingLeft: 'clamp(0.5rem, 1vw, 0.75rem)',
+                        paddingRight: 'clamp(0.5rem, 1vw, 0.75rem)'
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            <div
+              className="flex items-center border-l border-border"
+              style={{
+                gap: 'clamp(0.375rem, 0.8vw, 0.5rem)',
+                paddingLeft: 'clamp(0.5rem, 1.2vw, 0.75rem)',
+                marginLeft: 'clamp(0.25rem, 0.5vw, 0.375rem)'
+              }}
+            >
               <ThemeToggle />
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
+                {languages.map((l) => (
+                  <Link
+                    key={l.code}
+                    href={`/${l.code}`}
+                    className={`text-xs font-bold px-2 py-1 rounded whitespace-nowrap ${lang === l.code ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-primary'}`}
+                    style={{ fontSize: 'clamp(0.688rem, 0.75vw, 0.75rem)' }}
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Button
+              asChild
+              size="sm"
+              className="rounded-full whitespace-nowrap"
+              style={{
+                marginLeft: 'clamp(0.25rem, 0.5vw, 0.375rem)',
+                fontSize: 'clamp(0.813rem, 0.9vw, 0.875rem)',
+                paddingLeft: 'clamp(0.75rem, 1.5vw, 1rem)',
+                paddingRight: 'clamp(0.75rem, 1.5vw, 1rem)'
+              }}
+            >
+              <Link href="#contact" className="flex items-center gap-2">
+                <span className="hidden xl:inline">{dict.getQuote}</span>
+                <MessageCircle className="xl:hidden" size={18} />
+              </Link>
+            </Button>
+          </div>
+
+          {/* Mobile/Tablet Navigation - показывается до 1024px */}
+          <div className="lg:hidden flex items-center gap-2">
+            {/* Theme Toggle и языки для планшетов */}
+            <div className="hidden sm:flex items-center gap-2">
+              <ThemeToggle />
+              <div className="flex items-center gap-1">
                 {languages.map((l) => (
                   <Link
                     key={l.code}
@@ -70,65 +183,158 @@ const Navbar = ({ lang, dict }: { lang: string, dict: any }) => {
               </div>
             </div>
 
-            <Link
-              href="#contact"
-              className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-all shadow-sm"
-            >
-              {dict.getQuote}
-            </Link>
-          </div>
+            {/* Drawer Button */}
+            <Drawer direction="right">
+              <DrawerTrigger asChild>
+                <button className="text-foreground p-2 hover:bg-muted/50 rounded-lg transition-colors">
+                  <Menu size={24} />
+                </button>
+              </DrawerTrigger>
+              <DrawerContent className="h-full w-[85vw] sm:w-[350px] max-w-[400px] fixed right-0 top-0 bottom-0 rounded-none">
+                <DrawerHeader className="text-left border-b">
+                  <DrawerTitle>
+                    <Logo />
+                  </DrawerTitle>
+                  <DrawerDescription className="sr-only">
+                    Navigation menu
+                  </DrawerDescription>
+                </DrawerHeader>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+                <div className="flex-1 overflow-y-auto px-4 py-6">
+                  <div className="space-y-6">
+                    {/* Solutions Section */}
+                    <div>
+                      <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-3">
+                        {dict.solutions}
+                      </h3>
+                      <div className="space-y-1">
+                        {dict.solutionsList.map((solution: any, index: number) => (
+                          <DrawerClose key={index} asChild>
+                            <Link
+                              href={solution.href}
+                              className="flex items-start gap-3 py-2.5 px-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                            >
+                              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                {solutionIcons[index]}
+                              </div>
+                              <div className="text-sm flex-1 min-w-0">
+                                <div className="font-medium text-foreground group-hover:text-primary transition-colors">
+                                  {solution.name}
+                                </div>
+                                <div className="text-xs text-muted-foreground line-clamp-2 mt-0.5">
+                                  {solution.description}
+                                </div>
+                              </div>
+                            </Link>
+                          </DrawerClose>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    {/* Main Nav Links */}
+                    <div className="space-y-1">
+                      {navLinks.map((link) => (
+                        <DrawerClose key={link.name} asChild>
+                          <Link
+                            href={link.href}
+                            className="block text-base font-medium text-foreground py-3 px-3 rounded-lg hover:bg-muted/50 transition-colors"
+                          >
+                            {link.name}
+                          </Link>
+                        </DrawerClose>
+                      ))}
+                    </div>
+
+                    <Separator />
+
+                    {/* Language & Theme - только для мобильных */}
+                    <div className="space-y-4 sm:hidden">
+                      <div>
+                        <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-3">
+                          Language
+                        </h3>
+                        <div className="flex items-center gap-2">
+                          {languages.map((l) => (
+                            <Link
+                              key={l.code}
+                              href={`/${l.code}`}
+                              className={`text-sm font-bold px-3 py-2 rounded-lg flex-1 text-center ${
+                                lang === l.code
+                                  ? 'bg-primary text-primary-foreground'
+                                  : 'bg-muted text-muted-foreground hover:bg-muted/70'
+                              }`}
+                            >
+                              {l.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-3">
+                          Theme
+                        </h3>
+                        <ThemeToggle />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <DrawerFooter className="pt-4 border-t">
+                  <DrawerClose asChild>
+                    <Button asChild className="rounded-xl w-full">
+                      <Link href="#contact">
+                        {dict.getQuote}
+                      </Link>
+                    </Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-border py-6 px-4 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-5">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-lg font-medium text-foreground py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            
-            <div className="flex items-center justify-between py-4 border-y border-border">
-              <div className="flex items-center gap-4">
-                {languages.map((l) => (
-                  <Link
-                    key={l.code}
-                    href={`/${l.code}`}
-                    className={`text-sm font-bold px-3 py-2 rounded-lg ${lang === l.code ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-              <ThemeToggle />
-            </div>
-
-            <Link
-              href="#contact"
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-xl text-center font-semibold mt-2"
-              onClick={() => setIsOpen(false)}
-            >
-              {dict.getQuote}
-            </Link>
-          </div>
-        )}
       </div>
     </nav>
   );
 };
+
+// ListItem Component with Icon
+function ListItem({
+  title,
+  children,
+  href,
+  icon,
+  ...props
+}: React.ComponentPropsWithoutRef<"li"> & {
+  href: string;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <li {...props}>
+      <NavigationMenuLink asChild>
+        <Link
+          href={href}
+          className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+        >
+          <div className="flex items-start gap-3">
+            {icon && (
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                {icon}
+              </div>
+            )}
+            <div className="flex-1 space-y-1 min-w-0">
+              <div className="text-sm font-medium leading-none">{title}</div>
+              <p className="text-xs leading-snug text-muted-foreground line-clamp-2">
+                {children}
+              </p>
+            </div>
+          </div>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  );
+}
 
 export default Navbar;

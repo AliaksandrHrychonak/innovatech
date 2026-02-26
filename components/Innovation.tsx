@@ -50,12 +50,14 @@ const Innovation = ({ dict }: InnovationProps) => {
           <div className="relative">
             <div className="absolute -top-12 -left-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10" />
             <div className="space-y-8">
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <h2 className="text-primary font-bold tracking-wider uppercase text-sm">{dict.tag}</h2>
-                <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-tight">
-                  {dict.title}
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+                  <span className="bg-gradient-to-br from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+                    {dict.title}
+                  </span>
                 </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
                   {dict.description}
                 </p>
               </div>
@@ -76,7 +78,9 @@ const Innovation = ({ dict }: InnovationProps) => {
 
               <button className="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all group">
                 {dict.whitepaper}
-                <span className="w-8 h-px bg-primary group-hover:w-12 transition-all" />
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </button>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getDictionary } from "@/lib/get-dictionaries";
+import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/SEO/JsonLd";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -92,62 +93,17 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-  
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': 'https://innovatech.com/#organization',
-    name: 'InnovaTech',
-    url: 'https://innovatech.com',
-    logo: {
-      '@type': 'ImageObject',
-      '@id': 'https://innovatech.com/#logo',
-      url: 'https://innovatech.com/logo.png',
-      contentUrl: 'https://innovatech.com/logo.png',
-      caption: 'InnovaTech',
-      width: '512',
-      height: '512',
-    },
-    image: { '@id': 'https://innovatech.com/#logo' },
-    sameAs: [
-      'https://twitter.com/innovatech',
-      'https://linkedin.com/company/innovatech',
-    ],
-    description: 'Advanced greenhouse complexes and smart farming solutions for the CIS market.',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+1-555-555-5555',
-      contactType: 'sales',
-      areaServed: 'CIS',
-      availableLanguage: ['English', 'Russian', 'Kazakh'],
-    },
-  };
-
-  const websiteJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': 'https://innovatech.com/#website',
-    url: 'https://innovatech.com',
-    name: 'InnovaTech',
-    description: 'Future of Sustainable Agriculture',
-    publisher: { '@id': 'https://innovatech.com/#organization' },
-    inLanguage: lang,
-  };
 
   return (
     <html lang={lang} className={inter.variable} suppressHydrationWarning>
+      <head>
+        <OrganizationJsonLd lang={lang as 'ru' | 'en' | 'kk'} />
+        <WebsiteJsonLd lang={lang as 'ru' | 'en' | 'kk'} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

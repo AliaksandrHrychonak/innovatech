@@ -1,26 +1,78 @@
 {
   "navbar": {
     "solutions": "Solutions",
-    "innovation": "Innovation",
-    "impact": "Impact",
+    "technologies": "Technologies",
+    "projects": "Projects",
+    "company": "Company",
     "contact": "Contact",
-    "getQuote": "Get a Quote"
+    "getQuote": "Get Consultation",
+    "tagline": "Growing Together",
+    "solutionsList": [
+      {
+        "name": "Greenhouse Structures",
+        "description": "Industrial and commercial greenhouses",
+        "icon": "🏗️",
+        "href": "#solutions"
+      },
+      {
+        "name": "Climate Systems",
+        "description": "Ventilation, heating, cooling",
+        "icon": "🌡️",
+        "href": "#solutions"
+      },
+      {
+        "name": "Irrigation Systems",
+        "description": "Automated irrigation and fertigation",
+        "icon": "💧",
+        "href": "#solutions"
+      },
+      {
+        "name": "Automation",
+        "description": "Climate control and AI systems",
+        "icon": "🤖",
+        "href": "#solutions"
+      },
+      {
+        "name": "Seedling Equipment",
+        "description": "Cultivation systems and seeding",
+        "icon": "🌱",
+        "href": "#solutions"
+      },
+      {
+        "name": "Materials & Covers",
+        "description": "Films, screens, fasteners",
+        "icon": "📦",
+        "href": "#solutions"
+      },
+      {
+        "name": "Specialized Equipment",
+        "description": "Crop-specific solutions",
+        "icon": "🥬",
+        "href": "#solutions"
+      },
+      {
+        "name": "Service & Support",
+        "description": "Design, installation, 24/7 support",
+        "icon": "🛠️",
+        "href": "#solutions"
+      }
+    ]
   },
   "hero": {
     "exploreSolutions": "Explore Solutions",
     "quality": "Quality",
-    "qualityStandards": "EC Standards",
+    "qualityStandards": "GOST & ISO Standards",
     "innovation": "Innovation",
     "aiDriven": "AI Driven",
     "products": [
       {
-        "title": "Innovative Agriculture",
+        "title": "Full-Cycle Greenhouse Solutions",
         "subtitle": "Leading CIS Market",
-        "description": "Full-cycle development and installation of high-tech greenhouse complexes. We combine engineering excellence with sustainable growth.",
+        "description": "From design to post-warranty service. Wide range of services: greenhouses, climate control, automation, irrigation, and full support.",
         "stats": [
-          { "label": "Projects", "value": "500+" },
-          { "label": "Regions", "value": "15+" },
-          { "label": "Efficiency", "value": "98%" }
+          { "label": "Service Areas", "value": "Wide Range" },
+          { "label": "Years Experience", "value": "10+" },
+          { "label": "Support", "value": "24/7" }
         ]
       },
       {
@@ -56,26 +108,42 @@
     ]
   },
   "solutions": {
-    "tag": "Tailored Solutions",
-    "title": "Future-Ready Infrastructure for Modern Agriculture",
-    "description": "We provide a comprehensive range of products designed to meet the specific needs of different market segments.",
+    "tag": "9 Core Services",
+    "title": "Comprehensive Solutions for Agribusiness",
+    "description": "From greenhouse complexes to automation systems — everything needed for successful agribusiness, turnkey.",
     "learnMore": "Learn More",
     "items": [
       {
-        "title": "Industrial Complexes",
-        "description": "Large-scale automated greenhouse systems designed for maximum yield and commercial profitability."
+        "title": "Greenhouse Complexes",
+        "description": "Industrial, farm, and specialized greenhouses with climate control for year-round production."
       },
       {
-        "title": "Smart Farming",
-        "description": "Medium-sized solutions with integrated IoT sensors and automated climate control for optimized growth."
+        "title": "Ventilation & Climate Control",
+        "description": "Automated top and side ventilation systems, heating, cooling, and air circulation."
       },
       {
-        "title": "Eco-Residential",
-        "description": "Custom-designed greenhouses for private estates, focusing on aesthetics and year-round organic production."
+        "title": "Irrigation & Fertigation",
+        "description": "Drip irrigation, hydroponics, micro-sprinklers, and automated fertilizer application systems."
       },
       {
-        "title": "Technical Support",
-        "description": "Full maintenance, modernization of existing complexes, and expert consulting services across CIS."
+        "title": "Automation & IoT",
+        "description": "AI climate control systems, sensors, plant monitoring, and predictive yield analytics."
+      },
+      {
+        "title": "Seedling Equipment",
+        "description": "Cultivation tables, MOSA GREEN and SEDLIN seeding lines, substrate preparation equipment."
+      },
+      {
+        "title": "Construction Materials",
+        "description": "UV-stabilized greenhouse films, mounting systems, shading and energy-saving screens."
+      },
+      {
+        "title": "Specialized Equipment",
+        "description": "Lettuce lines, hydroponic systems, forest nursery equipment, and container growing solutions."
+      },
+      {
+        "title": "Turnkey Service",
+        "description": "Design, feasibility studies, installation supervision, staff training, warranty and post-warranty service."
       }
     ]
   },
@@ -125,19 +193,273 @@
       { "label": "Total Area (Ha)", "value": "850+" }
     ]
   },
+  "benefits": {
+    "tag": "Our Advantages",
+    "title": "Why Choose InnovaTech",
+    "description": "We provide not just equipment, but comprehensive solutions with full support at every stage.",
+    "items": [
+      {
+        "title": "GOST & ISO Compliance",
+        "description": "All our solutions are developed in accordance with international quality and safety standards."
+      },
+      {
+        "title": "10+ Years Experience",
+        "description": "Over a decade of successful operation in the CIS market, 500+ projects completed in 12 countries."
+      },
+      {
+        "title": "Full Turnkey Cycle",
+        "description": "From feasibility studies and design to installation, commissioning, and staff training."
+      },
+      {
+        "title": "24/7 Support",
+        "description": "Round-the-clock technical support, rapid response to client inquiries throughout the region."
+      },
+      {
+        "title": "Warranty & Service",
+        "description": "Warranty and post-warranty maintenance, spare parts supply, equipment modernization."
+      },
+      {
+        "title": "Scientific Partnership",
+        "description": "Collaboration with leading research institutes and universities to implement advanced agrotechnologies."
+      }
+    ],
+    "cta": "Ready to get a comprehensive solution for your business?",
+    "ctaButton": "Get Consultation"
+  },
+  "partners": {
+    "tag": "Scientific Partners & Memberships",
+    "title": "Trust Through Collaboration",
+    "description": "We are proud of our partnerships with leading scientific institutions and professional associations across the CIS region.",
+    "scientificPartnersTitle": "Our Scientific Partners",
+    "scientificPartners": [
+      {
+        "name": "Republican Forest Breeding and Seed Center",
+        "country": "Belarus",
+        "abbreviation": "RFSC"
+      },
+      {
+        "name": "Belarusian State Technological University",
+        "country": "Belarus",
+        "abbreviation": "BSTU"
+      },
+      {
+        "name": "Geevskaya Consulting Company",
+        "country": "Belarus",
+        "abbreviation": "GC"
+      },
+      {
+        "name": "Saint Petersburg Research Institute of Forestry",
+        "country": "Russia",
+        "abbreviation": "SPbRIF"
+      },
+      {
+        "name": "Central Asian Association of Plant Nurseries",
+        "country": "Kazakhstan",
+        "abbreviation": "CAAPN"
+      }
+    ],
+    "associationTitle": "Professional Association Memberships",
+    "associationDescription": "We are active members of leading industry associations",
+    "associations": [
+      { "name": "ROSA — Russian Association of Planting Material Producers" }
+    ]
+  },
+  "trustedBy": {
+    "title": "Trusted By",
+    "subtitle": "Leading CIS Companies",
+    "clientsCount": "Clients",
+    "countriesCount": "Countries",
+    "satisfactionRate": "Satisfied",
+    "industries": [
+      "Industrial Greenhouse Farms",
+      "Agricultural Enterprises",
+      "Forest Nurseries",
+      "Research Institutes",
+      "Private Investors",
+      "State Enterprises",
+      "Agricultural Holdings"
+    ]
+  },
+  "process": {
+    "tag": "How We Work",
+    "title": "From Idea to Harvest",
+    "description": "Full project cycle with support at every stage",
+    "steps": [
+      {
+        "title": "Consultation",
+        "description": "Needs analysis, optimal solutions selection, cost estimation",
+        "duration": "1-3 days"
+      },
+      {
+        "title": "Design",
+        "description": "Feasibility study, detailed design, technical solutions approval",
+        "duration": "2-4 weeks"
+      },
+      {
+        "title": "Installation",
+        "description": "Equipment delivery, installation supervision, commissioning",
+        "duration": "1-3 months"
+      },
+      {
+        "title": "Launch",
+        "description": "Staff training, test operation, facility handover",
+        "duration": "1-2 weeks"
+      },
+      {
+        "title": "Support",
+        "description": "Warranty service, 24/7 tech support, modernization",
+        "duration": "Ongoing"
+      }
+    ],
+    "cta": "Ready to start your project?",
+    "ctaButton": "Get Free Consultation"
+  },
+  "testimonials": {
+    "tag": "Client Testimonials",
+    "title": "Success Stories",
+    "description": "Real results from our clients — from yield to ROI",
+    "testimonials": [
+      {
+        "text": "Climate control automation reduced energy costs by 35% and increased tomato yield by 28%. System payback was 18 months.",
+        "author": "Alexey Petrov",
+        "position": "Director",
+        "company": "AgroTech Plus, Moscow Region",
+        "results": [
+          { "value": "-35%", "label": "Energy Costs" },
+          { "value": "+28%", "label": "Yield" }
+        ]
+      },
+      {
+        "text": "Full cycle from design to launch took 4 months. Professional team, quality equipment, 24/7 support.",
+        "author": "Irina Kozlova",
+        "position": "Owner",
+        "company": "Eco Farm, Minsk Region",
+        "results": [
+          { "value": "4 mo.", "label": "To Launch" },
+          { "value": "100%", "label": "Automation" }
+        ]
+      },
+      {
+        "text": "MOSA GREEN seeding line increased seedling complex productivity 3x. Now processing 50,000 trays per month.",
+        "author": "Sergey Volkov",
+        "position": "Chief Agronomist",
+        "company": "Green World, Almaty",
+        "results": [
+          { "value": "×3", "label": "Productivity" },
+          { "value": "50K", "label": "Trays/month" }
+        ]
+      }
+    ],
+    "ctaButton": "View All Cases"
+  },
+  "faq": {
+    "tag": "Frequently Asked Questions",
+    "title": "Answers to Your Questions",
+    "description": "Most popular questions about our solutions and services",
+    "questions": [
+      {
+        "question": "What are the timeframes for greenhouse project implementation?",
+        "answer": "Timeframes depend on project scale: for small farm greenhouses (up to 1 Ha) — 2-3 months, for industrial complexes (5-15 Ha) — 4-8 months. This includes design, equipment delivery, installation and commissioning."
+      },
+      {
+        "question": "Do you provide equipment warranty?",
+        "answer": "Yes, we provide warranty on all equipment from 12 to 36 months depending on type. Post-warranty service, spare parts supply and 24/7 tech support are also available."
+      },
+      {
+        "question": "Can you modernize existing greenhouses?",
+        "answer": "Absolutely! We conduct audits of existing facilities and offer modernization solutions: automation systems installation, covering replacement, drip irrigation implementation, energy-saving screens and other equipment."
+      },
+      {
+        "question": "What is the ROI for greenhouse complex investment?",
+        "answer": "ROI depends on crop, technology and market. On average, industrial complexes pay back in 2-4 years, farm greenhouses — in 1.5-3 years. We develop detailed business plans with ROI calculations for each project."
+      },
+      {
+        "question": "Do you train staff to operate equipment?",
+        "answer": "Yes, staff training is included in facility launch services. We conduct theoretical and practical sessions for agronomists, engineers and operators. Technical documentation in Russian is also provided."
+      },
+      {
+        "question": "Do you work throughout the CIS?",
+        "answer": "Yes, we have offices in Russia, Belarus and partners in Kazakhstan. We've completed projects in 12 CIS countries and provide local support in all regions of presence."
+      }
+    ],
+    "stillHaveQuestions": "Still have questions?",
+    "contactPrompt": "Our specialists will answer any questions about our solutions",
+    "contactButton": "Ask an Expert"
+  },
+  "contactCTA": {
+    "tag": "Ready to Start?",
+    "title": "Let's Discuss Your Project",
+    "description": "Our experts are ready to consult you on any questions about design, installation, and maintenance of greenhouse complexes.",
+    "requestConsultation": "Request Consultation",
+    "downloadCatalog": "Download Catalog",
+    "availableTime": "Available for consultations Monday through Friday, 9:00 AM - 6:00 PM",
+    "russia": "Russia",
+    "belarus": "Belarus",
+    "kazakhstan": "Kazakhstan"
+  },
   "footer": {
     "description": "Leading the transition to sustainable and intelligent agriculture across the CIS region.",
     "quickLinks": "Quick Links",
     "solutions": "Solutions",
+    "solutionsList": {
+      "industrial": "Industrial Complexes",
+      "smartFarming": "Smart Farming",
+      "ecoResidential": "Eco-Residential",
+      "support": "Technical Support"
+    },
     "innovation": "Innovation",
     "impact": "Impact",
+    "partners": "Partners",
     "contact": "Contact",
     "newsletter": "Newsletter",
     "newsletterDesc": "Get the latest updates on agricultural technology.",
     "subscribe": "Subscribe",
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "tagline": "Growing Together"
+  },
+  "awards": {
+    "tag": "Awards & Certifications",
+    "title": "Recognition of Quality",
+    "description": "Our achievements are confirmed by international certifications and industry awards",
+    "iso9001": "ISO 9001:2015",
+    "isoOrg": "International Organization for Standardization",
+    "iso9001Desc": "Quality management system certificate confirming high production standards",
+    "gost": "GOST R ISO 9001-2015",
+    "gostOrg": "Rosstandart",
+    "gostDesc": "Russian quality management system standard",
+    "qualityStandards": "European Standards",
+    "euOrg": "European Union",
+    "euDesc": "Compliance with European standards for product quality and production",
+    "bestSupplier": "Best Supplier of the Year",
+    "industryOrg": "Manufacturers Association",
+    "bestSupplierDesc": "Award for product quality, service, and innovative solutions",
+    "timeline": "Timeline of Achievements"
+  },
+  "trustMetrics": {
+    "title": "Trust Indicators",
+    "description": "Metrics reflecting our reliability and commitment to long-term relationships",
+    "npsScore": "NPS Score",
+    "npsDesc": "Net Promoter Score",
+    "repeatOrders": "Repeat Orders",
+    "repeatOrdersDesc": "Customers return again",
+    "partnership": "years partnership",
+    "partnershipDesc": "Average cooperation duration",
+    "regions": "CIS regions",
+    "regionsDesc": "Geography of our projects",
+    "bottomText": "These metrics reflect our commitment to quality and long-term client relationships. Over 78% of our customers return for new projects."
+  },
+  "projectsMap": {
+    "tag": "Project Geography",
+    "title": "Map of Our Achievements",
+    "description": "Successful projects across the CIS region - from industrial complexes to family farms",
+    "all": "All projects",
+    "industrial": "Industrial",
+    "farm": "Farm",
+    "seedling": "Seedling",
+    "mapNote": "CIS Geography",
+    "viewDetails": "View Project Details"
   },
   "seo": {
     "title": "InnovaTech | Future of Sustainable Agriculture",
